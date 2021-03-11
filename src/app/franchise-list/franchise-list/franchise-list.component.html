@@ -1,0 +1,38 @@
+<div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Applicant Name</th>
+            <th scope="col">ID Number</th>
+            <th scope="col">Birth Date</th>
+            <th scope="col">Contact Address</th>
+            <th scope="col">Contact Phone</th>
+            <th scope="col">Contact Email</th>
+            <th scope="col">Describe your previous experience about Food & Beverage business</th>
+            <th scope="col">Describe your interest about our brand</th>
+            <th scope="col">Planned investment amount in USD</th>
+            <th scope="col">In which geographical areas would you like to operate</th>
+            <th scope="col">Additional Notes</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr *ngFor="let franchise of franchises">
+            <td>{{ franchise.applicantName }}</td>
+            <td>{{ franchise.idNumber }}</td>
+            <td>{{ franchise.birthDate }}</td>
+            <td>{{ franchise.contactAddress }}</td>
+            <td>{{ franchise.contactPhone}}</td>
+            <td><a href="mailto:{{ franchise.contactEmail }}">{{ franchise.contactEmail }}</a></td>
+            <td>{{ franchise. previousExperience }}</td>
+            <td>{{ franchise. intrestBrand }}</td>
+            <td>{{ franchise. investment}}</td>
+            <td>{{ franchise. geographicalArea }}</td>
+            <td>{{ franchise. additionalNotes }}</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

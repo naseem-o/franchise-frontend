@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'franchise-frontend';
+  title : string;
+
+  constructor() {
+    this.title = 'Franchise Application';
+  }
 }

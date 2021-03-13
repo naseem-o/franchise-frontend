@@ -20,11 +20,17 @@ export class FranchiseFormComponent implements OnInit {
   ) { this.franchise = new Franchise()}
 
   onSubmit() {
-    this.franchiseService.save(this.franchise).subscribe(result => this.gotoFranchiseList());
+    this.franchiseService.save(this.franchise)
+    .subscribe({
+      next: result => this.gotoFranchiseList(),
+       error:error => {
+          alert(error.error.message);
+        }}
+       );
   }
 
   gotoFranchiseList() {
-    this.router.navigate(['/rest/franchise/list']);
+    this.router.navigate(['http://localhost:8080/rest/franchise/list']);
   }
 
   public showMyMessage = false

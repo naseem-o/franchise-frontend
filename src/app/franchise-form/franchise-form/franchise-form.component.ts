@@ -22,7 +22,10 @@ export class FranchiseFormComponent implements OnInit {
   onSubmit() {
     this.franchiseService.save(this.franchise)
     .subscribe({
-      next: result => this.gotoFranchiseList(),
+      next: result => {
+        this.gotoFranchiseList();
+        alert("Details submitted!!!");
+      },
        error:error => {
           alert(error.error.message);
         }}
@@ -30,16 +33,9 @@ export class FranchiseFormComponent implements OnInit {
   }
 
   gotoFranchiseList() {
-    this.router.navigate(['http://localhost:8080/rest/franchise/list']);
+    this.router.navigate(['/rest/franchise/list']);
   }
 
-  public showMyMessage = false
-
-showMessageSoon() {
-  setTimeout(() => {
-    this.showMyMessage = true
-  }, 1000)
-}
 
   ngOnInit(): void {
   }

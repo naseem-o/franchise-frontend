@@ -1,10 +1,10 @@
 <div class="card my-5">
   <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #franchiseForm="ngForm">
+    <form (ngSubmit)="franchiseForm.form.valid && onSubmit()" #franchiseForm="ngForm">
 
 
       <div class="form-group">
-        <label for="applicantName">Applicant Name</label>
+        <label for="applicantName">Applicant Name :</label>
         <input type="text" [(ngModel)]="franchise.applicantName" class="form-control" id="applicantName"
           name="applicantName" placeholder="Enter applicant name" required #applicantName="ngModel">
       </div>
@@ -12,7 +12,7 @@
 
 
       <div class="form-group">
-        <label for="idNumber">Id Number</label>
+        <label for="idNumber">Id Number :</label>
         <input type="text" [(ngModel)]="franchise.idNumber" class="form-control" id="idNumber" name="idNumber"
           placeholder="Enter id number" required #idNumber="ngModel">
         <div [hidden]="!idNumber.pristine" class="alert alert-danger">Id number is required</div>
@@ -20,7 +20,7 @@
 
 
       <div class="form-group">
-        <label for="birthDate">Birth Date</label>
+        <label for="birthDate">Birth Date :</label>
         <input type="date" [(ngModel)]="franchise.birthDate" class="form-control" id="birthDate" name="birthDate"
           placeholder="Enter birth date" required #birthDate="ngModel">
         <div [hidden]="!birthDate.pristine" class="alert alert-danger">Birth date is required</div>
@@ -28,31 +28,61 @@
 
 
       <div class="form-group">
-        <label for="contactAddress">Contact Address</label>
+        <label for="contactAddress">Contact Address :</label>
         <input type="text" [(ngModel)]="franchise.contactAddress" class="form-control" id="contactAddress"
           name="contactAddress" placeholder="Enter contact address" required #contactAddress="ngModel">
         <div [hidden]="!contactAddress.pristine" class="alert alert-danger">Contact address is required</div>
       </div>
 
 
+
       <div class="form-group">
-        <label for="contactPhone">Contact Phone</label>
-        <input type="text" [(ngModel)]="franchise.contactPhone" class="form-control" id="contactPhone"
-          name="contactPhone" placeholder="Enter contact phone" required #contactPhone="ngModel">
+        <label for="contactPhone">Contact Phone :</label>
+        <input 
+        type="tel" 
+        [(ngModel)]="franchise.contactPhone" 
+        class="form-control" 
+        id="contactPhone"
+        name="contactPhone"
+        placeholder="Enter contact phone"
+        #contactPhone="ngModel"
+        pattern="\+[0-9]+"
+        required>
+
+        <div *ngIf="contactPhone.touched">
+          <p *ngIf="contactPhone.errors?.required" style="color:red">Contact phone is required.</p>
+          <p *ngIf="contactPhone.errors?.pattern" style="color:red">Please, enter correct phone number.</p>
+      </div>
+
         <div [hidden]="!contactPhone.pristine" class="alert alert-danger">Contact phone is required</div>
       </div>
 
 
       <div class="form-group">
-        <label for="contactEmail">Contact Email</label>
-        <input type="email" [(ngModel)]="franchise.contactEmail" class="form-control" id="contactEmail"
-          name="contactEmail" placeholder="Enter contact email" required #contactEmail="ngModel">
+        <label for="contactEmail">Contact Email :</label>
+        <input type="email" 
+        [(ngModel)]="franchise.contactEmail"
+         class="form-control"
+          id="contactEmail"
+          name="contactEmail" 
+          placeholder="Enter contact email"
+          #contactEmail="ngModel"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+           required>
+
+           <div *ngIf="contactEmail.touched">
+            <p *ngIf="contactEmail.errors?.required" style="color:red">Email is a required field!</p>
+            <p *ngIf="contactEmail.errors?.pattern" style="color:red">This is not a valid Email!!!</p>
+          </div>
+
         <div [hidden]="!contactEmail.pristine" class="alert alert-danger">Contact email is required</div>
       </div>
 
+      
+
 
       <div class="form-group">
-        <label for="previousExperience">Describe your previous experience about Food & Beverage business</label>
+        <label for="previousExperience">Describe your previous experience in Food & Beverage business :</label>
         <input type="text" [(ngModel)]="franchise.previousExperience" class="form-control" id="previousExperience"
           name="previousExperience" placeholder="Enter previous experience" required #previousExperience="ngModel">
         <div [hidden]="!previousExperience.pristine" class="alert alert-danger">Previous experience is required</div>
@@ -60,7 +90,7 @@
 
 
       <div class="form-group">
-        <label for="intrestBrand">Describe your interest about our brand</label>
+        <label for="intrestBrand">Describe your interest in our brand :</label>
         <input type="text" [(ngModel)]="franchise.intrestBrand" class="form-control" id="intrestBrand"
           name="intrestBrand" placeholder="Enter intrest in brand" required #intrestBrand="ngModel">
         <div [hidden]="!intrestBrand.pristine" class="alert alert-danger">Intrest in brand is required</div>
@@ -68,42 +98,74 @@
 
 
       <div class="form-group">
-        <label for="investment">Planned investment amount in USD</label>
-        <input type="number" [(ngModel)]="franchise.investment" class="form-control" id="investment" name="investment"
-          placeholder="Enter investment in USD" required #investment="ngModel">
+        <label for="investment">Planned investment amount in USD :</label>
+        <input 
+        type="number"
+         [(ngModel)]="franchise.investment" 
+          class="form-control"
+          id="investment"
+          name="investment"
+          placeholder="Enter investment in USD" 
+          required 
+          #investment="ngModel"
+          pattern="^\d+(?:\.\d{1,2})?$">
+
+          <div *ngIf="investment.touched">
+            <p *ngIf="investment.errors?.required" style="color:red">Please enter the value in number format!!!</p>
+            <p *ngIf="investment.errors?.pattern" style="color:red">Please enter number in decimal format upto two places!!!</p>
+          </div>
         <div [hidden]="!investment.pristine" class="alert alert-danger">Investment is required</div>
       </div>
 
 
 
       <div class="form-group">
-        <label for="geographicalArea">In which geographical areas would you like to operate</label>
-        <input list="geographicalArea" [(ngModel)]="franchise.geographicalArea" 
-              class="form-control" 
-              id="geographicalArea" 
-              name="geographicalArea" 
-              placeholder="Enter geographical area"
-              required #geographicalArea="ngModel"> 
+        <label for="geographicalArea">In which geographical area would you like to operate :</label>
+        <p>
+        <select 
+        id="geographicalArea" 
+        name="geographicalArea"
+        [(ngModel)]="franchise.geographicalArea"
+        class="form-control"
+        required
+        #geographicalArea="ngModel">
+          <option value="eastern africa">Eastern Africa</option>
+          <option value="middle africa">Middle Africa</option>
+          <option value="northern africa">Northern Africa</option>
+          <option value="southern africa">Southern Africa</option>
+          <option value="western africa">Western Africa</option>
+          <option value="central america">Central America</option>
+          <option value="north america">North America</option>
+          <option value="south america">South America</option>
+          <option value="eastern europe">Eastern Europe</option>
+          <option value="european union">European Union</option>
+          <option value="middle east">Middle East</option>
+          <option value="north america">North America</option>
+          <option value="south america">South America</option>
+          <option value="oceania">Oceania</option>
+          <option value="asia">Asia</option>
+        </select>
+        </p>
         <div [hidden]="!geographicalArea.pristine" class="alert alert-danger">Geographical area is required</div>
       </div>
 
 
 
       <div class="form-group">
-        <label for="additionalNotes">Additional Notes</label>
-        <input type="text" [(ngModel)]="franchise.additionalNotes" class="form-control" id="additionalNotes"
-          name="additionalNotes" placeholder="Enter additional notes" #additionalNotes="ngModel">
-        <!-- <div [hidden]="!additionalNotes.pristine" class="alert alert-danger">Additional notes is required</div> -->
+        <label for="additionalNotes">Additional Notes :</label>
+        <textarea 
+        [(ngModel)]="franchise.additionalNotes" 
+        class="form-control" 
+        id="additionalNotes"
+        name="additionalNotes" 
+        placeholder="Enter additional notes" 
+        #additionalNotes="ngModel"></textarea>
       </div>
 
-     
-      <button type="submit" (click)="showMessageSoon()" [disabled]="!franchiseForm.form.valid"
-        class="btn btn-info">Submit</button>
-     
-      <p></p>
 
-      <p *ngIf="showMyMessage" style="background-color:mediumseagreen;font-size:28px;text-align:center;">Submitted!!!
-      </p>
+      <button type="submit" [disabled]="!franchiseForm.form.valid"
+        class="btn btn-info">Submit</button>
+
     </form>
   </div>
 </div>
